@@ -1,4 +1,4 @@
-from .simple_graph import SimpleGraph
+from src.simple_graph import SimpleGraph
 from pyformlang.regular_expression import Regex
 
 

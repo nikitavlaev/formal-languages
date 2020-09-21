@@ -1,5 +1,5 @@
-from . import utils
-from .graph import Graph
+from src import utils
+from src.graph import Graph
 
 
 def algo(graph, regexp):
