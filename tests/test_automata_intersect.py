@@ -19,7 +19,7 @@ class TestAutomata:
         state1 = State(1)
         state2 = State(2)
         state3 = State(3)
-        
+
         # Add a start state
         self.dfa1.add_start_state(state0)
         self.dfa2.add_start_state(state0)
@@ -54,7 +54,7 @@ class TestAutomata:
 
     def test_dfa_inter(self):
         self.init_dfas()
-        dfa_inter = self.dfa1 & self.dfa2 
+        dfa_inter = self.dfa1 & self.dfa2
 
         # Intersection result should accept only "ac", but not "ab" or "ad"
         assert(not dfa_inter.accepts([self.symb_a, self.symb_b]))
