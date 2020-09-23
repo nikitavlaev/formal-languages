@@ -9,8 +9,11 @@ class Regexp(SimpleGraph):
         self.states_map = states_map
 
     @staticmethod
-    def from_str(st):
-        e_dfa = Regex.from_python_regex(st).to_epsilon_nfa()
+    def from_str(st, py=True):
+        if py:
+            e_dfa = Regex.from_python_regex(st).to_epsilon_nfa()
+        else:
+            e_dfa = Regex(st).to_epsilon_nfa()
         dfa = e_dfa.to_deterministic().minimize()
 
         dfa, states_map = SimpleGraph.dfa_normalize_states(dfa)
@@ -25,6 +28,6 @@ class Regexp(SimpleGraph):
         return Regexp(edges, size + 1, dfa, states_map)
 
     @staticmethod
-    def from_txt(filename):
+    def from_txt(filename, py=True):
         with open(filename, 'r') as f:
-            return Regexp.from_str(f.readline())
+            return Regexp.from_str(f.readline(), py)
