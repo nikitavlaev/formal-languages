@@ -28,4 +28,8 @@ optional arguments:
   --end-vertices-file END_VERTICES_FILE
                         File with vertices set. e.g. 0 4 5 8
 ```
+## Transitive closure benchmark results
+Full report can be found at benchmark/Report.pdf  
+According to testing using LUBM datasets, squaring and multiplying by adjacency matrix shown almost no difference
+
 [![Build Status](https://travis-ci.com/nikitavlaev/formal-languages.svg?branch=task01)](https://travis-ci.com/nikitavlaev/formal-languages)
