@@ -14,11 +14,13 @@ def main():
         "-g", "--graph-file",
         help=('File with graph as edge list. '
               'Format: (vertice, label, vertice)'),
+        required=True,
     )
     parser.add_argument(
         "-r", "--regexp-file",
         help=('File with regexp as a query. '
               'e.g. (0 2 (13? 6)*)+  (15 | 14)*)'),
+        required=True,
     )
     parser.add_argument(
         "--start-vertices-file",

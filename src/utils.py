@@ -1,11 +1,13 @@
-def transitive_closure(m):
+def transitive_closure(m, algo_num):
     res = m.dup()
-
     changed = True
     while changed:
         changed = False
         old_not_nulls = res.nvals
-        res += res @ res
+        if algo_num == 1:
+            res += res @ res
+        else:
+            res += res @ m
         new_not_nulls = res.nvals
         if new_not_nulls != old_not_nulls:
             changed = True
@@ -29,5 +31,5 @@ def squash_bool_ms(bool_ms):
     bool_ms = list(bool_ms.values())
     res = bool_ms[0]
     for other in bool_ms[1:]:
-        res = res | other
+        res = res + other
     return res
