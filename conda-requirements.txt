@@ -1,2 +1,3 @@
 pytest
 pygraphblas
+cached-property
