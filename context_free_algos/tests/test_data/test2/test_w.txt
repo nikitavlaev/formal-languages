@@ -1,0 +1,13 @@
+
+abc
+a
+b
+c
+aab
+bbbccccc
+aabbbbc
+bac
+bca
+acccb
+dddea 
+f
