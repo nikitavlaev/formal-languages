@@ -32,4 +32,7 @@ optional arguments:
 Full report can be found at benchmark/Report.pdf  
 According to testing using LUBM datasets, squaring and multiplying by adjacency matrix shown almost no difference
 
+## CYK and CFPQ  
+Added CYK algo implementation and Hellings-based CFPQ in context_free_algos
+
 [![Build Status](https://travis-ci.com/nikitavlaev/formal-languages.svg?branch=task01)](https://travis-ci.com/nikitavlaev/formal-languages)
