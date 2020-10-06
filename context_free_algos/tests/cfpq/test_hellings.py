@@ -1,15 +1,15 @@
 from pathlib import Path
 import os
-from context_free_algos.hellings import run_hellings_from_file
+from context_free_algos.cfpq.hellings import run_hellings_from_file
 from itertools import starmap
 
 
-class TestCYK:
+class TestHellings:
     tests_folder = 'test_data'
 
     def test_all(self):
         current_tests_path = Path(
-            Path(__file__).parent,
+            Path(__file__).parent.parent,
             self.tests_folder,
         )
 
