@@ -1,4 +1,5 @@
 import pygraphblas as pgb
+from itertools import starmap
 
 
 def transitive_closure(m, algo_num):
@@ -58,3 +59,10 @@ def squash_bool_ms(bool_ms):
     for other in bool_ms[1:]:
         res = res + other
     return res
+
+
+def read_edges(edges_file_name):
+    with open(edges_file_name, 'r') as g_f:
+        edges_map = map(lambda line: line.split(), g_f.readlines())
+        edges = list(starmap(lambda vs, l, ve: (int(vs), l, int(ve)), edges_map))
+    return edges

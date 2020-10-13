@@ -3,8 +3,13 @@ from pyformlang.regular_expression import Regex
 
 
 class Regexp(SimpleGraph):
-    def __init__(self, edges, size, fa, states_map=None):
-        super(Regexp, self).__init__(edges, size)
+    def __init__(self, size, edges, fa, states_map=None):
+        super(Regexp, self).__init__(
+            size,
+            edges=edges,
+            start_states=set([fa.start_state]),
+            final_states=fa._final_states,
+        )
         self.fa = fa
         self.states_map = states_map
 
@@ -25,7 +30,7 @@ class Regexp(SimpleGraph):
                 label = str(label)
                 size = max(size, vs, ve)
                 edges.append((vs, label, ve))
-        return Regexp(edges, size + 1, dfa, states_map)
+        return Regexp(size + 1, edges, dfa, states_map)
 
     @staticmethod
     def from_txt(filename, py=True):

@@ -16,14 +16,14 @@ def random_data(request):
     v_to = [random.randint(0, vertices_num) for _ in range(edges_num)]
     values = [random.choice(['a', 'b', 'c', 'd']) for _ in range(edges_num)]
     edges_list = zip(v_from, values, v_to)
-    graph = Graph(edges_list, vertices_num + 1)
+    graph = Graph(vertices_num + 1, edges=edges_list)
     regex = Regexp.from_str(regex_str)
     return graph, regex
 
 
 def test_intersection_random(random_data):
     graph, regex = random_data
-    intersection_bool_ms = graph.intersection_bool_ms(regex)
+    intersection_bool_ms = graph.intersect_bool_ms(regex)
 
     for (value, matrix) in intersection_bool_ms.items():
         matrix_lists = matrix.to_lists()

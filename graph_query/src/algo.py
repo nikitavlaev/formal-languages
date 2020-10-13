@@ -1,10 +1,10 @@
-from src import utils
+from utils import graph_utils as utils
 from src.graph import Graph
 
 
 def algo(graph, regexp, closure_algo=1):
     print("Intersecting graphs...")
-    intersection_bool_ms = graph.intersection_bool_ms(regexp)
+    intersection_bool_ms = graph.intersect_bool_ms(regexp)
     print("Squashing...")
     intersection_squashed = utils.squash_bool_ms(intersection_bool_ms)
     print("Calculating closure...")
@@ -25,8 +25,8 @@ def algo(graph, regexp, closure_algo=1):
     print("Creating intersection")
     edges, inter_size = utils.bool_ms_to_edges(intersection_bool_ms)
     intersection = Graph(
-        edges,
         inter_size,
+        edges=edges,
         start_states=start_states,
         final_states=final_states,
     )

@@ -3,10 +3,21 @@ from src.simple_graph import SimpleGraph
 
 class Graph(SimpleGraph):
 
-    def __init__(self, edges, size, start_states=None, final_states=None):
-        super(Graph, self).__init__(edges, size)
-        self.start_states = start_states
-        self.final_states = final_states
+    def __init__(
+        self,
+        size,
+        edges=[],
+        bool_ms={},
+        start_states=None,
+        final_states=None,
+    ):
+        super(Graph, self).__init__(
+            size,
+            edges=edges,
+            bool_ms=bool_ms,
+            start_states=start_states,
+            final_states=final_states,
+        )
 
     @property
     def fa(self):
@@ -22,4 +33,9 @@ class Graph(SimpleGraph):
                 vs, ve = int(vs), int(ve)
                 size = max(size, vs, ve)
                 edges.append((vs, label, ve))
-        return Graph(edges, size + 1, start_states, final_states)
+        return Graph(
+            size + 1,
+            edges=edges,
+            start_states=start_states,
+            final_states=final_states,
+        )
