@@ -1,8 +1,8 @@
 import argparse
 
-from src.graph import Graph
-from src.regexp import Regexp
-from src.algo import algo
+from graph.graph import Graph
+from graph.regexp import Regexp
+from graph_query.algo import algo
 
 
 def main():

@@ -1,7 +1,7 @@
 import pytest
 import random
-from src.graph import Graph
-from src.regexp import Regexp
+from graph.graph import Graph
+from graph.regexp import Regexp
 
 
 @pytest.fixture(scope="function", params=[

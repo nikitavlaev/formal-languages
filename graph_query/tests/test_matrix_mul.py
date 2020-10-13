@@ -1,4 +1,4 @@
-import pygraphblas as pgb 
+import pygraphblas as pgb
 
 
 def test_matrix_mul():

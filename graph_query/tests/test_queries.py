@@ -1,11 +1,11 @@
-from src import algo
-from src.graph import Graph
-from src.regexp import Regexp
 from pathlib import Path
 from pyformlang.finite_automaton import \
     NondeterministicFiniteAutomaton, \
     Symbol, \
     State
+from graph_query import algo
+from graph.graph import Graph
+from graph.regexp import Regexp
 
 
 class TestQueries:
