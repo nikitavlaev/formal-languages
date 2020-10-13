@@ -1,3 +1,6 @@
+import pygraphblas as pgb
+
+
 def transitive_closure(m, algo_num):
     res = m.dup()
     changed = True
@@ -19,10 +22,32 @@ def num_to_coord(num, row_size):
     return num // row_size, num % row_size
 
 
+def edges_to_bool_ms(edges, size):
+    label_edges = {}
+    for vs, label, ve in edges:
+        if label in label_edges.keys():
+            label_edges[label]['starts'].append(vs)
+            label_edges[label]['ends'].append(ve)
+        else:
+            label_edges[label] = {}
+            label_edges[label]['starts'] = [vs]
+            label_edges[label]['ends'] = [ve]
+    bool_ms = {}
+    for label, edge in label_edges.items():
+        bool_ms[label] = pgb.Matrix.from_lists(
+            edge['starts'],
+            edge['ends'],
+            [1 for i in range(len(edge['starts']))],
+            nrows=size,
+            ncols=size,
+        )
+    return bool_ms
+
+
 def bool_ms_to_edges(bool_ms):
     edges = []
     for label, m in bool_ms.items():
-        for i, j, value in m:
+        for i, j, _ in m:
             edges.append((i, label, j))
     return edges, list(bool_ms.values())[0].nrows
 

@@ -4,7 +4,7 @@ from src.graph import Graph
 
 def algo(graph, regexp, closure_algo=1):
     print("Intersecting graphs...")
-    intersection_bool_ms = graph.intersect(regexp)
+    intersection_bool_ms = graph.intersection_bool_ms(regexp)
     print("Squashing...")
     intersection_squashed = utils.squash_bool_ms(intersection_bool_ms)
     print("Calculating closure...")
@@ -14,11 +14,11 @@ def algo(graph, regexp, closure_algo=1):
     size = regexp.size
 
     reachable = []
-    
+
     print("Calculating reachables...")
-    for i, j, val in res:
-        i_outer, i_inner = utils.num_to_coord(i, size)
-        j_outer, j_inner = utils.num_to_coord(j, size)
+    for i, j, _ in res:
+        i_outer, _ = utils.num_to_coord(i, size)
+        j_outer, _ = utils.num_to_coord(j, size)
         if i in start_states and j in final_states:
             reachable.append((i_outer, j_outer))
 

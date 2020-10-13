@@ -1,15 +1,16 @@
-import pygraphblas as pgb
 from pyformlang.finite_automaton import \
     DeterministicFiniteAutomaton, \
     NondeterministicFiniteAutomaton
+from src.utils import edges_to_bool_ms
 
 
 class SimpleGraph():
+    fa = None
 
     def __init__(self, edges, size):
         self.edges = edges
         self.size = size
-        self.bool_ms = self.edges_to_bool_ms()
+        self.bool_ms = edges_to_bool_ms(edges, size)
 
     def get_fa(self, start_states, final_states):
         fa = NondeterministicFiniteAutomaton()
@@ -24,27 +25,6 @@ class SimpleGraph():
         for fs in final_states:
             fa.add_final_state(fs)
         return fa
-
-    def edges_to_bool_ms(self):
-        label_edges = {}
-        for vs, label, ve in self.edges:
-            if label in label_edges.keys():
-                label_edges[label]['starts'].append(vs)
-                label_edges[label]['ends'].append(ve)
-            else:
-                label_edges[label] = {}
-                label_edges[label]['starts'] = [vs]
-                label_edges[label]['ends'] = [ve]
-        bool_ms = {}
-        for label, edge in label_edges.items():
-            bool_ms[label] = pgb.Matrix.from_lists(
-                edge['starts'],
-                edge['ends'],
-                [1 for i in range(len(edge['starts']))],
-                nrows=self.size,
-                ncols=self.size,
-            )
-        return bool_ms
 
     @staticmethod
     def dfa_normalize_states(dfa):
@@ -76,7 +56,7 @@ class SimpleGraph():
             res.add_final_state(state)
         return res, states_map
 
-    def intersect(self, other):
+    def intersection_bool_ms(self, other):
         intersection_bool_ms = {}
         for label in self.bool_ms:
             if label in other.bool_ms:

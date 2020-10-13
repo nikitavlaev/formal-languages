@@ -23,9 +23,9 @@ def random_data(request):
 
 def test_intersection_random(random_data):
     graph, regex = random_data
-    intersection = graph.intersect(regex)
+    intersection_bool_ms = graph.intersection_bool_ms(regex)
 
-    for (value, matrix) in intersection.items():
+    for (value, matrix) in intersection_bool_ms.items():
         matrix_lists = matrix.to_lists()
         for i in range(len(matrix_lists[0])):
             v_from = matrix_lists[0][i]

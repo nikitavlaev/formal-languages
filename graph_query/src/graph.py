@@ -7,11 +7,11 @@ class Graph(SimpleGraph):
         super(Graph, self).__init__(edges, size)
         self.start_states = start_states
         self.final_states = final_states
-    
+
     @property
     def fa(self):
         return self.get_fa(self.start_states, self.final_states)
-    
+
     @staticmethod
     def from_txt(filename, start_states=None, final_states=None):
         edges = []
