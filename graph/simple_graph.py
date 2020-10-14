@@ -2,6 +2,7 @@ from pyformlang.finite_automaton import \
     DeterministicFiniteAutomaton, \
     NondeterministicFiniteAutomaton
 from utils import graph_utils as utils
+from cached_property import cached_property
 
 
 class SimpleGraph():
@@ -10,16 +11,25 @@ class SimpleGraph():
     def __init__(
         self,
         size,
-        edges=[],
-        bool_ms={},
+        edges=None,
+        bool_ms=None,
         start_states=None,
         final_states=None,
     ):
-        self.edges = edges or utils.bool_ms_to_edges(bool_ms)
         self.size = size
-        self.bool_ms = bool_ms or utils.edges_to_bool_ms(edges, size)
+        self._bool_ms = bool_ms
+        self._edges = edges
         self.start_states = start_states
         self.final_states = final_states
+        assert bool_ms or edges
+
+    @cached_property
+    def bool_ms(self):
+        return self._bool_ms or utils.edges_to_bool_ms(self.edges, self.size)
+
+    @cached_property
+    def edges(self):
+        return self._edges or utils.bool_ms_to_edges(self.bool_ms)
 
     def get_fa(self, start_states, final_states):
         fa = NondeterministicFiniteAutomaton()
@@ -97,7 +107,7 @@ class SimpleGraph():
     def intersection(self, other, closure_algo=1):
         print("Intersecting graphs...")
         intersection_bool_ms = self.intersect_bool_ms(other)
-        size = intersection_bool_ms.values()[0].size
+        size = list(intersection_bool_ms.values())[0].nrows
         print("Starts and finals...")
         start_states, final_states = self.intersect_starts_and_finals(other)
         return SimpleGraph(

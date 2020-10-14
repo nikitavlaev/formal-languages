@@ -6,8 +6,8 @@ class Graph(SimpleGraph):
     def __init__(
         self,
         size,
-        edges=[],
-        bool_ms={},
+        edges=None,
+        bool_ms=None,
         start_states=None,
         final_states=None,
     ):

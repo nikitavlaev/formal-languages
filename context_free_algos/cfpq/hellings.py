@@ -1,5 +1,5 @@
 from context_free_algos.cfg import custom_CFG
-from context_free_algos.graph_utils import read_edges
+from utils.graph_utils import read_edges
 
 
 def hellings(edges, gram):
@@ -9,7 +9,7 @@ def hellings(edges, gram):
         n = max(n, edge[0], edge[2])
 
     if gram.is_eps_reachable:
-        for v in range(n):
+        for v in range(n + 1):
             r.add((gram.start_symbol, v, v))
 
     final_nterms = {}
