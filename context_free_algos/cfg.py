@@ -2,7 +2,6 @@ import pyformlang.cfg as cfg
 from cached_property import cached_property
 import string
 
-
 class custom_CFG(cfg.CFG):
 
     def __init__(self, variables, terminals, start_symbol, productions):
@@ -79,3 +78,17 @@ class custom_CFG(cfg.CFG):
             cls._read_line(line, productions, terminals, variables)
         return cls(variables=variables, terminals=terminals,
                    productions=productions, start_symbol=start_symbol)
+
+    @cached_property
+    def split_prods(self):
+        term_prods = []
+        eps_prods = []
+        norm_prods = []
+        for prod in self.productions:
+            if len(prod.body) == 0:
+                eps_prods.append(prod)
+            elif len(prod.body) == 1:
+                term_prods.append(prod)
+            else:
+                norm_prods.append(prod)
+        return eps_prods, term_prods, norm_prods

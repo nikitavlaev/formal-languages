@@ -34,5 +34,6 @@ According to testing using LUBM datasets, squaring and multiplying by adjacency 
 
 ## CYK and CFPQ  
 Added CYK algo implementation and Hellings-based CFPQ in context_free_algos
+Added matmul-based and tensor product-based CFPQ algos
 
 [![Build Status](https://travis-ci.com/nikitavlaev/formal-languages.svg?branch=task01)](https://travis-ci.com/nikitavlaev/formal-languages)
