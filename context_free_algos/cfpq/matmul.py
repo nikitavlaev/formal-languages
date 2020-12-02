@@ -8,18 +8,18 @@ def cfpq(edges, gram):
     for edge in edges:
         n = max(n, edge[0], edge[2])
 
-    eps_prods, term_prods, norm_prods = gram.split_prods
+    eps_productions, term_productions, norm_productions = gram.split_productions
 
     bool_ms = {}
     for nterm in gram.variables:
         bool_ms[nterm] = pgb.Matrix.sparse(pgb.BOOL, n + 1, n + 1)
 
     for (vs, l, ve) in edges:
-        for prod in term_prods:
+        for prod in term_productions:
             if prod.body[0].value == l:
                 bool_ms[prod.head][(vs, ve)] = 1
 
-    for prod in eps_prods:
+    for prod in eps_productions:
         for i in range(n + 1):
             bool_ms[prod.head][(i, i)] = 1
 
@@ -27,7 +27,7 @@ def cfpq(edges, gram):
     while changed:
         old_changed = changed
         changed = set()
-        for prod in norm_prods:
+        for prod in norm_productions:
             if prod.body[0] in old_changed or prod.body[1] in old_changed:
                 old_nval = bool_ms[prod.head].nvals
                 bool_ms[prod.head] = bool_ms[prod.head] + (bool_ms[prod.body[0]] @ bool_ms[prod.body[1]])
