@@ -1,0 +1,3 @@
+connect "/home/nikita/db" 
+select filter (v, e, u) -> (e hasLbl text) : edges from "g.txt"
+ 
