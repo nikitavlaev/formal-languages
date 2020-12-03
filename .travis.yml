@@ -1,6 +1,9 @@
 language: python
 python:
   "3.7"
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install antlr4
 install:
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
   - bash miniconda.sh -b -p $HOME/miniconda
@@ -11,4 +14,5 @@ install:
   - pip install -r pip-requirements.txt
 
 script:
+  - cd query_lang && antlr4 -Dlanguage=Python3 -o antlr_grammar antlr_grammar.g4 && cd ../
   - python -m pytest
