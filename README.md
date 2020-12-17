@@ -40,45 +40,44 @@ Added matmul-based and tensor product-based CFPQ algos
 
 ## Graph Query Language
 ### Grammar
-<pre>
--- Main script is a list of statements
+-- Main script is a list of statements  
 <b>SCRIPT STMT SCRIPT
-SCRIPT EPS</b>
+SCRIPT EPS</b>  
 
--- Connect to the graph database
-<b>STMT connect " STRING "</b>
--- Add new production to the grammar
-<b>STMT STRING : PATTERN</b>
--- Execute query with constraints
-<b>STMT select QOBJECT from GRAPH</b>
+-- Connect to the graph database  
+<b>STMT connect " STRING "</b>  
+-- Add new production to the grammar  
+<b>STMT STRING : PATTERN</b>  
+-- Execute query with constraints  
+<b>STMT select QOBJECT from GRAPH</b>  
 
 -- Graph can be represented as:  
--- Intersection of 2 other graphs
-<b>GRAPH GRAPH intersect RGR</b>
--- Regex as DFA
-<b>RGR [ PATTERN ]</b>
--- Collected grammar as RSM
-<b>RGR grammar</b>
--- Loaded from the file with provided name from the connected database
-<b>RGR " STRING "</b>
+-- Intersection of 2 other graphs  
+<b>GRAPH GRAPH intersect RGR</b>  
+-- Regex as DFA  
+<b>RGR [ PATTERN ]</b>  
+-- Collected grammar as RSM  
+<b>RGR grammar</b>  
+-- Loaded from the file with provided name from the connected database  
+<b>RGR " STRING "</b>  
 
--- Start and final vertices can be fixed in the graph
-<b>RGR setStartAndFinal VERTICES VERTICES GRAPH</b>
+-- Start and final vertices can be fixed in the graph  
+<b>RGR setStartAndFinal VERTICES VERTICES GRAPH</b>  
 
--- Vertices can be provided as set, range or none
-<b>VERTICES { SET }/b>
-<b>VERTICES INT : INT</b>
-<b>VERTICES _</b>
+-- Vertices can be provided as set, range or none  
+<b>VERTICES { SET }</b>  
+<b>VERTICES INT : INT</b>  
+<b>VERTICES _</b>  
 
--- Query objective is the subject that one might want to select from the graph
--- All edges, total amount of the edges, or subset of the edges, specified by filter is supported
-<b>QOBJECT EDGES</b>
-<b>QOBJECT count EDGES</b>
--- Filtering edges:
-<b>EDGES filter COND : EDGES</b>
-<b>COND ( STRING , STRING , STRING ) -> ( BOOL_EXPR )</b>
--- Boolean expression supports |, &, ! operations  
--- Also predicates like hasLbl, isStart, isFinal are available
+-- Query objective is the subject that one might want to select from the graph  
+-- All edges, total amount of the edges, or subset of the edges, specified by filter is supported  
+<b>QOBJECT EDGES</b>  
+<b>QOBJECT count EDGES</b>  
+-- Filtering edges:  
+<b>EDGES filter COND : EDGES</b>  
+<b>COND ( STRING , STRING , STRING ) -> ( BOOL_EXPR )</b>  
+-- Boolean expression supports |, &, ! operations    
+-- Also predicates like hasLbl, isStart, isFinal are available  
 
 #### Examples 
 
@@ -93,3 +92,30 @@ SCRIPT EPS</b>
    - `select filter (v, e, u) -> (e hasLbl abc & isStart v | !(isFinal u)) : edges from "g"`
  - Count all edges in intersection of provided graphs:
    - `select count edges from "g1" intersect ("g2" intersect "g3")`
+
+#### ANTLR grammar 
+Added query language grammar for ANTLR. Added tree DOT-file generation.
+
+##### Prerequisites:
+```
+sudo apt-get update
+sudo apt-get install antlr4
+pip install antlr4-python3-runtime
+```
+Generate necessary ANTLR files(root dir):
+```
+cd query_lang && antlr4 -Dlanguage=Python3 -o antlr_grammar antlr_grammar.g4 && cd ../
+```
+Generate DOT file:
+
+```
+usage: tree.py [-h] script dot_file
+Generate DOT file with parse tree of given script
+positional arguments:
+  script      Path to script written in DB language
+  dot_file    Path to save generated DOT file
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+Example: `python tree.py ./tests/test_data/test1/input.txt ./tree.dot`
