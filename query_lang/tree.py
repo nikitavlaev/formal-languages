@@ -1,26 +1,7 @@
 from argparse import ArgumentParser
-from antlr4.tree.Trees import Trees
 from query_lang.parsing import ANTLRGrammar
 
-class TreeTraverser():
-    def __init__(self, parser):
-        self.parser = parser
-        self.cnt = 0
-        self.stack = [0]
-        self.edges = []
-        self.nodes = []
-
-    def traverse(self, tree):
-        parent_label = Trees.getNodeText(tree, self.parser.ruleNames)
-        self.nodes.append((self.stack[-1], parent_label))
-        for child in Trees.getChildren(tree):
-            self.cnt += 1
-            self.edges.append((self.stack[-1], self.cnt))
-            self.stack.append(self.cnt)
-            self.traverse(child)
-            self.stack.pop()
-
-def print_tree():
+if __name__ == "__main__":
     parser = ArgumentParser(
         description="""Generate DOT file with parse tree of given script"""
     )
@@ -35,7 +16,3 @@ def print_tree():
 
     args = parser.parse_args()
     ANTLRGrammar(args.script).generate_dot_tree(args.dot_file)
-
-
-if __name__ == "__main__":
-    print_tree()

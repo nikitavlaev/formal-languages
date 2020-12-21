@@ -16,5 +16,5 @@ class TestANTLR:
             print(f"Current test num: {i + 1}, {f}")
             print(open(Path(current_tests_path, f, 'res.txt')).readline())
             res = bool(int(open(Path(current_tests_path, f, 'res.txt')).readline())) 
-            assert res == ANTLRGrammar(Path(current_tests_path, f, 'input.txt')).check()
+            assert res == ANTLRGrammar.check(Path(current_tests_path, f, 'input.txt'))
 

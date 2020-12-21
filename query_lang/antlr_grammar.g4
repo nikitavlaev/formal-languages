@@ -1,6 +1,6 @@
 grammar antlr_grammar;
 
-script : (stmt '\n')* EOF ;
+script : (stmt ';')* EOF ;
 
 stmt : 'connect' '"' STRING '"' 
      | STRING ':' pattern
@@ -82,4 +82,4 @@ fragment LOWER : [a-z] ;
 fragment UPPER : [A-Z] ;
 fragment DIGIT : [0-9] ;
 STRING : (LOWER | UPPER | '/') (LOWER | UPPER | DIGIT | '_' | '/' | '.' )* ;
-SPACE : [ \r\t]+ -> skip ; 
+SPACE : [ \r\t\n]+ -> skip ; 

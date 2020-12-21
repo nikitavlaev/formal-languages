@@ -1,2 +1,2 @@
-connect "/home/nikita/db" 
-select count edges from ("g1.txt" intersect ("g2.txt" intersect "g3.txt")) 
+connect "/home/nikita/db"; 
+select count edges from ("g1.txt" intersect ("g2.txt" intersect "g3.txt")); 

@@ -3,7 +3,7 @@ from antlr4 import *
 from antlr4.error.ErrorListener import ErrorListener
 from query_lang.antlr_grammar.antlr_grammarLexer import antlr_grammarLexer
 from query_lang.antlr_grammar.antlr_grammarParser import antlr_grammarParser
-from query_lang.tree import TreeTraverser
+from query_lang.tree_traverser import TreeTraverser
 
 
 class ANTLRGrammar:
@@ -22,7 +22,7 @@ class ANTLRGrammar:
 
     @staticmethod
     def check(path):
-        return ANTLRGrammar.__parse(path) is not None
+        return bool(ANTLRGrammar.__parse(path))
 
     @staticmethod
     def generate_dot_tree(path):

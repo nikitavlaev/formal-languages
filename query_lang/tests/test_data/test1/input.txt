@@ -1,6 +1,6 @@
-connect "/home/nikita/db"
-select edges from "g.txt"
+connect "/home/nikita/db";
+select edges from "g.txt";
 S : term(a).term(b)*
-S : var(S).(term(c)|term(d))+
-S : eps
-select count edges from ("g.txt" intersect grammar)
+    | var(S).(term(c)|term(d))+
+    | eps;
+select count edges from ("g.txt" intersect grammar);
