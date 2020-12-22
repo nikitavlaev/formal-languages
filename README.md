@@ -36,6 +36,9 @@ According to testing using LUBM datasets, squaring and multiplying by adjacency 
 Added CYK algo implementation and Hellings-based CFPQ in context_free_algos
 Added matmul-based and tensor product-based CFPQ algos
 
+## Derivative-based regular language parser
+Added parser for regular languages that uses derivative approach to determine containment of a word
+
 [![Build Status](https://travis-ci.com/nikitavlaev/formal-languages.svg?branch=task01)](https://travis-ci.com/nikitavlaev/formal-languages)
 
 ## Graph Query Language
