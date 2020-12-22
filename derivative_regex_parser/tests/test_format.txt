@@ -1,0 +1,6 @@
+regex
+word
+0|1
+
+# You should use dot('.') to express concatenation in regexes
+# since pyformlang regexes use that representation
